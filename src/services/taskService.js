@@ -93,7 +93,7 @@ export const searchTasks = async (query) => {
 
 export const logout = () => {
   localStorage.removeItem("token");
-  window.location.replace(`${API_URL}/login`);
+  window.location.replace("/login");
 };
 
 
