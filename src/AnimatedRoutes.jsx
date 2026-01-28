@@ -4,7 +4,7 @@ import { lazy } from "react";
 import App from './App.jsx'
 import ProtectedRoute from "./pages/ProtectedRoute.jsx";
 
-const Signup = lazy(() => import("./pages/signup.jsx"));
+const Signup = lazy(() => import("./pages/Signup.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
 const Forgot_password = lazy(() => import("./pages/forgot_password.jsx"));
 const Verify_otp = lazy(() => import("./pages/OTPVerification.jsx"))
