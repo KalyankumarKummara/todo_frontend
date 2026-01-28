@@ -48,7 +48,7 @@ function OTPVerification() {
     if (!user_id) return setError("User ID missing. Please request OTP again.");
     setLoading(true);
     try {
-      const res = await axios.post("http://127.0.0.1:8000/verify-reset-otp", {
+      const res = await axios.post("https://todo-backend-6wde.onrender.com/verify-reset-otp", {
         user_id,
         otp: enteredOtp,
       });
@@ -67,7 +67,7 @@ function OTPVerification() {
     setError("");
     setMessage("");
     try {
-      const res = await axios.post("http://127.0.0.1:8000/resend-reset-otp", {
+      const res = await axios.post("https://todo-backend-6wde.onrender.com/resend-reset-otp", {
         email,
         otp: enteredOtp
       });

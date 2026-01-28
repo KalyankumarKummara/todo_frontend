@@ -70,7 +70,7 @@ function ResetPassword() {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://127.0.0.1:8000/reset-password", {
+      const res = await axios.post("https://todo-backend-6wde.onrender.com/reset-password", {
         user_id,
         otp,
         new_password: password,

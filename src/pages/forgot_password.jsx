@@ -23,7 +23,7 @@ function ForgotPassword() {
         setLoading(true);
 
         try {
-            const res = await axios.post("http://127.0.0.1:8000/forgot-password", { email });
+            const res = await axios.post("https://todo-backend-6wde.onrender.com/forgot-password", { email });
             setMessage(res.data.message);
             navigate("/verify-otp", { state: { email, user_id: res.data.user_id } });
         } catch (err) {

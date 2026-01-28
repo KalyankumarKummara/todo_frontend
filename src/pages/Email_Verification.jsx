@@ -45,7 +45,7 @@ function EmailVerification() {
     try {
       setLoading(true);
       const response = await axios.post(
-        `http://localhost:8000/verify-email?user_id=${userId}&otp=${otp.join("")}`
+        `https://todo-backend-6wde.onrender.com/verify-email?user_id=${userId}&otp=${otp.join("")}`
       );
 
       if (response.data.message) {
@@ -68,7 +68,7 @@ function EmailVerification() {
       setResendMsg("");
       setResendError("");
       const userId = localStorage.getItem("userId");
-      const response = await axios.post(`http://localhost:8000/resend-email?user_id=${userId}`);
+      const response = await axios.post(`https://todo-backend-6wde.onrender.com/resend-email?user_id=${userId}`);
       if (response.data.message) {
         setResendMsg(response.data.message);
         setResendCooldown(30);

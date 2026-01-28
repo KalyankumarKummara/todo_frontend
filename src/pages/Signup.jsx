@@ -38,7 +38,7 @@ function Signup() {
 
         try {
             setLoading(true);
-            const response = await axios.post("http://localhost:8000/signup", {
+            const response = await axios.post("https://todo-backend-6wde.onrender.com/signup", {
                 username: formData.username,
                 email: formData.email,
                 password: formData.password,
