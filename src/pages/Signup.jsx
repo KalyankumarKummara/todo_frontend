@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
-import {useNavigate} from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 import PublicLayout from "../components/PublicLayout";
 
 function Signup() {
@@ -49,7 +50,7 @@ function Signup() {
                 setSuccessMsg(response.data.message);
                 localStorage.setItem("userId", response.data.user_id);
                 navigate("/verify-email")
-            
+
             } else {
                 setErrorMsg(response.data.message || "Signup failed");
             }
@@ -102,196 +103,196 @@ function Signup() {
 
     return (
         <PublicLayout>
-        <div className="min-h-screen bg-gradient-to-br from-neutral-light via-neutral-white to-neutral-light flex items-center justify-center p-4 font-body relative overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary/5 animate-pulse"></div>
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-accent/5 animate-pulse" style={{ animationDelay: '1s' }}></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-r from-primary/3 to-accent/3 blur-3xl"></div>
-            </div>
-
-            <div className="relative w-full max-w-md">
-                {/* Main Card */}
-                <div className="bg-neutral-white/95 backdrop-blur-lg rounded-3xl shadow-2xl border border-neutral-light/50 p-10 transform hover:scale-[1.01] transition-all duration-500">
-
-                    {/* Header */}
-                    <div className="text-center mb-8">
-                        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-primary to-accent mb-6 shadow-lg transform hover:rotate-6 transition-transform duration-300">
-                            <UserIcon className="text-neutral-white w-8 h-8" />
-                        </div>
-                        <h1 className="font-heading text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-                            Create Account
-                        </h1>
-                        <p className="text-neutral-dark font-medium">
-                            Join our community today
-                        </p>
-                    </div>
-                    {successMsg && (
-                        <div className="mb-4 p-3 rounded-lg text-sm font-medium text-green-600 bg-green-50 border border-green-200">
-                            {successMsg}
-                        </div>
-                    )}
-                    {errorMsg && (
-                        <div className="mb-4 p-3 rounded-lg text-sm font-medium text-red-600 bg-red-50 border border-red-200">
-                            {errorMsg}
-                        </div>
-                    )}
-                    {/* Form */}
-                    <form onSubmit={handleSubmit} className="space-y-6">
-
-                        {/* Username Field */}
-                        <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <UserIcon className={`w-5 h-5 transition-colors duration-200 ${focusedField === 'username' ? 'text-primary' : 'text-neutral-dark'
-                                    }`} />
-                            </div>
-                            <input
-                                type="text"
-                                placeholder="Username"
-                                value={formData.username}
-                                onChange={handleInputChange('username')}
-                                onFocus={() => setFocusedField('username')}
-                                onBlur={() => setFocusedField(null)}
-                                className={`w-full pl-12 pr-4 py-4 bg-neutral-white border-2 rounded-xl font-medium text-neutral-darkest placeholder-neutral-dark/60 transition-all duration-300 focus:outline-none ${focusedField === 'username'
-                                    ? 'border-primary shadow-lg shadow-primary/20'
-                                    : 'border-neutral-light hover:border-primary/50'
-                                    }`}
-                                required
-                            />
-
-                        </div>
-
-                        {/* Email Field */}
-                        <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <MailIcon className={`w-5 h-5 transition-colors duration-200 ${focusedField === 'email' ? 'text-primary' : 'text-neutral-dark'
-                                    }`} />
-                            </div>
-                            <input
-                                type="email"
-                                placeholder="Email Address"
-                                value={formData.email}
-                                onChange={handleInputChange('email')}
-                                onFocus={() => setFocusedField('email')}
-                                onBlur={() => setFocusedField(null)}
-                                className={`w-full pl-12 pr-4 py-4 bg-neutral-white border-2 rounded-xl font-medium text-neutral-darkest placeholder-neutral-dark/60 transition-all duration-300 focus:outline-none ${focusedField === 'email'
-                                    ? 'border-primary shadow-lg shadow-primary/20'
-                                    : 'border-neutral-light hover:border-primary/50'
-                                    }`}
-                                required
-                            />
-
-                        </div>
-
-                        <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <LockIcon className={`w-5 h-5 transition-colors duration-200 ${focusedField === 'password' ? 'text-primary' : 'text-neutral-dark'
-                                    }`} />
-                            </div>
-                            <input
-                                type={showPassword ? 'text' : 'password'}
-                                placeholder="Password"
-                                value={formData.password}
-                                autoComplete='new-password'
-                                onChange={handleInputChange('password')}
-                                onFocus={() => setFocusedField('password')}
-                                onBlur={() => setFocusedField(null)}
-                                className={`w-full pl-12 pr-12 py-4 bg-neutral-white border-2 rounded-xl font-medium text-neutral-darkest placeholder-neutral-dark/60 transition-all duration-300 focus:outline-none ${focusedField === 'password'
-                                    ? 'border-primary shadow-lg shadow-primary/20'
-                                    : 'border-neutral-light hover:border-primary/50'
-                                    }`}
-                                required
-                                minLength={6}
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="absolute inset-y-0 right-0 pr-4 flex items-center text-neutral-dark hover:text-primary transition-colors duration-200 focus:outline-none"
-                            >
-                                {showPassword ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
-                            </button>
-
-                        </div>
-
-                        {/* Confirm Password Field */}
-                        <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <LockIcon className={`w-5 h-5 transition-colors duration-200 ${focusedField === 'confirmPassword' ? 'text-primary' : 'text-neutral-dark'
-                                    }`} />
-                            </div>
-                            <input
-                                type={showConfirmPassword ? 'text' : 'password'}
-                                placeholder="Confirm Password"
-                                value={formData.confirmPassword}
-                                onChange={handleInputChange('confirmPassword')}
-                                onFocus={() => setFocusedField('confirmPassword')}
-                                onBlur={() => setFocusedField(null)}
-                                className={`w-full pl-12 pr-12 py-4 bg-neutral-white border-2 rounded-xl font-medium text-neutral-darkest placeholder-neutral-dark/60 transition-all duration-300 focus:outline-none ${focusedField === 'confirmPassword'
-                                    ? 'border-primary shadow-lg shadow-primary/20'
-                                    : 'border-neutral-light hover:border-primary/50'
-                                    }`}
-                                required
-                                minLength={6}
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                className="absolute inset-y-0 right-0 pr-4 flex items-center text-neutral-dark hover:text-primary transition-colors duration-200 focus:outline-none"
-                            >
-                                {showConfirmPassword ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
-                            </button>
-
-                        </div>
-                        {formData.password && (
-                            <div className="text-xs text-neutral-dark space-y-1">
-                                <p className="font-medium">Password Requirements:</p>
-                                <div className="flex flex-wrap gap-2">
-                                    <span className={`px-2 py-1 rounded-full text-xs ${formData.password.length >= 6 ? 'bg-success/20 text-success' : 'bg-neutral-light text-neutral-dark'
-                                        }`}>
-                                        6+ characters
-                                    </span>
-                                    <span className={`px-2 py-1 rounded-full text-xs ${formData.password === formData.confirmPassword && formData.confirmPassword !== ''
-                                        ? 'bg-success/20 text-success'
-                                        : 'bg-neutral-light text-neutral-dark'
-                                        }`}>
-                                        Passwords match
-                                    </span>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Submit Button */}
-                        <button
-                            type="submit"
-                            className="w-full bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-neutral-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 font-heading text-lg relative overflow-hidden group focus:outline-none focus:ring-4 focus:ring-primary/30"
-                        >
-                            <span className="relative z-10">Create Account</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-primary-hover to-accent-hover opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </button>
-                    </form>
-
-                    {/* Footer */}
-                    <div className="text-center mt-8 space-y-4">
-                        <p className="text-neutral-dark text-sm">
-                            Already have an account?{' '}
-                            <a
-                                href="/login"
-                                className="text-accent hover:text-accent-hover font-semibold transition-colors duration-200 hover:underline focus:outline-none focus:ring-2 focus:ring-accent/30 rounded"
-                            >
-                                Sign in here
-                            </a>
-                        </p>
-
-                        {/* Security Badge */}
-                        <div className="flex items-center justify-center text-xs text-neutral-dark bg-success/5 py-2 px-4 rounded-full border border-success/20">
-                            <ShieldIcon className="w-4 h-4 text-success mr-2" />
-                            Your information is secure and encrypted
-                        </div>
-                    </div>
+            <div className="min-h-screen bg-gradient-to-br from-neutral-light via-neutral-white to-neutral-light flex items-center justify-center p-4 font-body relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-primary/5 animate-pulse"></div>
+                    <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-accent/5 animate-pulse" style={{ animationDelay: '1s' }}></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-r from-primary/3 to-accent/3 blur-3xl"></div>
                 </div>
 
+                <div className="relative w-full max-w-md">
+                    {/* Main Card */}
+                    <div className="bg-neutral-white/95 backdrop-blur-lg rounded-3xl shadow-2xl border border-neutral-light/50 p-10 transform hover:scale-[1.01] transition-all duration-500">
+
+                        {/* Header */}
+                        <div className="text-center mb-8">
+                            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-primary to-accent mb-6 shadow-lg transform hover:rotate-6 transition-transform duration-300">
+                                <UserIcon className="text-neutral-white w-8 h-8" />
+                            </div>
+                            <h1 className="font-heading text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
+                                Create Account
+                            </h1>
+                            <p className="text-neutral-dark font-medium">
+                                Join our community today
+                            </p>
+                        </div>
+                        {successMsg && (
+                            <div className="mb-4 p-3 rounded-lg text-sm font-medium text-green-600 bg-green-50 border border-green-200">
+                                {successMsg}
+                            </div>
+                        )}
+                        {errorMsg && (
+                            <div className="mb-4 p-3 rounded-lg text-sm font-medium text-red-600 bg-red-50 border border-red-200">
+                                {errorMsg}
+                            </div>
+                        )}
+                        {/* Form */}
+                        <form onSubmit={handleSubmit} className="space-y-6">
+
+                            {/* Username Field */}
+                            <div className="relative group">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <UserIcon className={`w-5 h-5 transition-colors duration-200 ${focusedField === 'username' ? 'text-primary' : 'text-neutral-dark'
+                                        }`} />
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Username"
+                                    value={formData.username}
+                                    onChange={handleInputChange('username')}
+                                    onFocus={() => setFocusedField('username')}
+                                    onBlur={() => setFocusedField(null)}
+                                    className={`w-full pl-12 pr-4 py-4 bg-neutral-white border-2 rounded-xl font-medium text-neutral-darkest placeholder-neutral-dark/60 transition-all duration-300 focus:outline-none ${focusedField === 'username'
+                                        ? 'border-primary shadow-lg shadow-primary/20'
+                                        : 'border-neutral-light hover:border-primary/50'
+                                        }`}
+                                    required
+                                />
+
+                            </div>
+
+                            {/* Email Field */}
+                            <div className="relative group">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <MailIcon className={`w-5 h-5 transition-colors duration-200 ${focusedField === 'email' ? 'text-primary' : 'text-neutral-dark'
+                                        }`} />
+                                </div>
+                                <input
+                                    type="email"
+                                    placeholder="Email Address"
+                                    value={formData.email}
+                                    onChange={handleInputChange('email')}
+                                    onFocus={() => setFocusedField('email')}
+                                    onBlur={() => setFocusedField(null)}
+                                    className={`w-full pl-12 pr-4 py-4 bg-neutral-white border-2 rounded-xl font-medium text-neutral-darkest placeholder-neutral-dark/60 transition-all duration-300 focus:outline-none ${focusedField === 'email'
+                                        ? 'border-primary shadow-lg shadow-primary/20'
+                                        : 'border-neutral-light hover:border-primary/50'
+                                        }`}
+                                    required
+                                />
+
+                            </div>
+
+                            <div className="relative group">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <LockIcon className={`w-5 h-5 transition-colors duration-200 ${focusedField === 'password' ? 'text-primary' : 'text-neutral-dark'
+                                        }`} />
+                                </div>
+                                <input
+                                    type={showPassword ? 'text' : 'password'}
+                                    placeholder="Password"
+                                    value={formData.password}
+                                    autoComplete='new-password'
+                                    onChange={handleInputChange('password')}
+                                    onFocus={() => setFocusedField('password')}
+                                    onBlur={() => setFocusedField(null)}
+                                    className={`w-full pl-12 pr-12 py-4 bg-neutral-white border-2 rounded-xl font-medium text-neutral-darkest placeholder-neutral-dark/60 transition-all duration-300 focus:outline-none ${focusedField === 'password'
+                                        ? 'border-primary shadow-lg shadow-primary/20'
+                                        : 'border-neutral-light hover:border-primary/50'
+                                        }`}
+                                    required
+                                    minLength={6}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-neutral-dark hover:text-primary transition-colors duration-200 focus:outline-none"
+                                >
+                                    {showPassword ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+                                </button>
+
+                            </div>
+
+                            {/* Confirm Password Field */}
+                            <div className="relative group">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <LockIcon className={`w-5 h-5 transition-colors duration-200 ${focusedField === 'confirmPassword' ? 'text-primary' : 'text-neutral-dark'
+                                        }`} />
+                                </div>
+                                <input
+                                    type={showConfirmPassword ? 'text' : 'password'}
+                                    placeholder="Confirm Password"
+                                    value={formData.confirmPassword}
+                                    onChange={handleInputChange('confirmPassword')}
+                                    onFocus={() => setFocusedField('confirmPassword')}
+                                    onBlur={() => setFocusedField(null)}
+                                    className={`w-full pl-12 pr-12 py-4 bg-neutral-white border-2 rounded-xl font-medium text-neutral-darkest placeholder-neutral-dark/60 transition-all duration-300 focus:outline-none ${focusedField === 'confirmPassword'
+                                        ? 'border-primary shadow-lg shadow-primary/20'
+                                        : 'border-neutral-light hover:border-primary/50'
+                                        }`}
+                                    required
+                                    minLength={6}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-neutral-dark hover:text-primary transition-colors duration-200 focus:outline-none"
+                                >
+                                    {showConfirmPassword ? <EyeOffIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+                                </button>
+
+                            </div>
+                            {formData.password && (
+                                <div className="text-xs text-neutral-dark space-y-1">
+                                    <p className="font-medium">Password Requirements:</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        <span className={`px-2 py-1 rounded-full text-xs ${formData.password.length >= 6 ? 'bg-success/20 text-success' : 'bg-neutral-light text-neutral-dark'
+                                            }`}>
+                                            6+ characters
+                                        </span>
+                                        <span className={`px-2 py-1 rounded-full text-xs ${formData.password === formData.confirmPassword && formData.confirmPassword !== ''
+                                            ? 'bg-success/20 text-success'
+                                            : 'bg-neutral-light text-neutral-dark'
+                                            }`}>
+                                            Passwords match
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Submit Button */}
+                            <button
+                                type="submit"
+                                className="w-full bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-neutral-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 font-heading text-lg relative overflow-hidden group focus:outline-none focus:ring-4 focus:ring-primary/30"
+                            >
+                                <span className="relative z-10">Create Account</span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-primary-hover to-accent-hover opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </button>
+                        </form>
+
+                        {/* Footer */}
+                        <div className="text-center mt-8 space-y-4">
+                            <p className="text-neutral-dark text-sm">
+                                Already have an account?{' '}
+                                <Link
+                                    to="/login"
+                                    className="text-accent hover:text-accent-hover font-semibold transition-colors duration-200 hover:underline focus:outline-none focus:ring-2 focus:ring-accent/30 rounded"
+                                >
+                                    Sign in here
+                                </Link>
+                            </p>
+
+                            {/* Security Badge */}
+                            <div className="flex items-center justify-center text-xs text-neutral-dark bg-success/5 py-2 px-4 rounded-full border border-success/20">
+                                <ShieldIcon className="w-4 h-4 text-success mr-2" />
+                                Your information is secure and encrypted
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
         </PublicLayout>
     );
 }
